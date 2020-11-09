@@ -31,6 +31,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -43,5 +47,4 @@ dependencies {
 
     compileOnly project(path: ':runaway')
     kapt project(path: ':runaway')
-    annotationProcessor project(path: ':runaway')
 }

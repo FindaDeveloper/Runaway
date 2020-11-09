@@ -18,6 +18,7 @@ import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.MirroredTypesException;
@@ -70,6 +71,10 @@ public class ContainerProcessor extends AbstractProcessor {
         List<State> states = new ArrayList<>();
 
         for (Element stateElement : stateElements) {
+            if (stateElement.getKind() == ElementKind.CONSTRUCTOR) {
+                continue;
+            }
+
             StateGenerator stateGenerator = StateGeneratorFactory.getStateGenerator(stateElement);
             State state = stateGenerator.generateState();
             states.add(state);
@@ -86,7 +91,7 @@ public class ContainerProcessor extends AbstractProcessor {
         TypeSpec.Builder containerBuilder = TypeSpec.classBuilder(fileName);
         generateScopeConstructors(containerBuilder, scopeTypes);
         generateFields(containerBuilder, states);
-        
+
         return containerBuilder.build();
     }
 

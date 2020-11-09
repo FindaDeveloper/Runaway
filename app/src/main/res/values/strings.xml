@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RunAway</string>
+    <string name="first_value">첫번째 값</string>
+    <string name="next">다음으로</string>
+    <string name="second_value">두번째 값</string>
+    <string name="calculate">계산하기</string>
 </resources>

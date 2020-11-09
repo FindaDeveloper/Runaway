@@ -39,6 +39,7 @@ public class DefaultFieldGenerator extends FieldGenerator {
         String setterName = "set" + StringUtil.getFirstUpperString(state.getName());
         return MethodSpec.methodBuilder(setterName)
                 .addModifiers(Modifier.PUBLIC)
+                .addParameter(state.getTypeName(), state.getName())
                 .addStatement("this." + state.getName() + " = " + state.getName())
                 .build();
     }

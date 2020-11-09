@@ -16,9 +16,11 @@ public abstract class FieldGenerator {
         this.state = state;
     }
 
-    public abstract FieldSpec getFieldSpec();
+    public abstract FieldSpec generateFieldSpec();
 
-    public abstract MethodSpec getGetterMethodSpec();
+    public abstract MethodSpec generateGetterMethodSpec();
 
-    public abstract MethodSpec getSetterMethodSpec();
+    public abstract MethodSpec generateSetterMethodSpec();
+    
+    public abstract MethodSpec generateGetOrDefaultMethodSpec();
 }

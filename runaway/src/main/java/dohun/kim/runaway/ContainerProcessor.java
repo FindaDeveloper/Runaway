@@ -119,9 +119,10 @@ public class ContainerProcessor extends AbstractProcessor {
         for (State state : states) {
             FieldGenerator fieldGenerator = FieldGeneratorFactory.getFieldGenerator(state);
 
-            containerBuilder.addField(fieldGenerator.getFieldSpec());
-            containerBuilder.addMethod(fieldGenerator.getGetterMethodSpec());
-            containerBuilder.addMethod(fieldGenerator.getSetterMethodSpec());
+            containerBuilder.addField(fieldGenerator.generateFieldSpec());
+            containerBuilder.addMethod(fieldGenerator.generateGetterMethodSpec());
+            containerBuilder.addMethod(fieldGenerator.generateSetterMethodSpec());
+            containerBuilder.addMethod(fieldGenerator.generateGetOrDefaultMethodSpec());
         }
     }
 

@@ -16,15 +16,15 @@ public class DefaultFieldGenerator extends FieldGenerator {
     }
 
     @Override
-    public FieldSpec getFieldSpec() {
-        return FieldSpec.builder(state.getTypeName(), state.getName())
+    public FieldSpec generateFieldSpec() {
+        return FieldSpec.builder(state.getTypeName().box(), state.getName())
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
                 .addAnnotation(Nullable.class)
                 .build();
     }
 
     @Override
-    public MethodSpec getGetterMethodSpec() {
+    public MethodSpec generateGetterMethodSpec() {
         String getterName = "get" + StringUtil.getFirstUpperString(state.getName());
         return MethodSpec.methodBuilder(getterName)
                 .addModifiers(Modifier.PUBLIC)
@@ -35,7 +35,7 @@ public class DefaultFieldGenerator extends FieldGenerator {
     }
 
     @Override
-    public MethodSpec getSetterMethodSpec() {
+    public MethodSpec generateSetterMethodSpec() {
         String setterName = "set" + StringUtil.getFirstUpperString(state.getName());
         return MethodSpec.methodBuilder(setterName)
                 .addModifiers(Modifier.PUBLIC)
@@ -44,5 +44,17 @@ public class DefaultFieldGenerator extends FieldGenerator {
                 .build();
     }
 
-
+    @Override
+    public MethodSpec generateGetOrDefaultMethodSpec() {
+        String methodName = "get" + StringUtil.getFirstUpperString(state.getName()) + "OrDefault";
+        return MethodSpec.methodBuilder(methodName)
+                .returns(state.getTypeName().box())
+                .addModifiers(Modifier.PUBLIC)
+                .addParameter(state.getTypeName(), "defaultValue")
+                .beginControlFlow("if (" + state.getName() + " == null)")
+                .addStatement(state.getName() + " = defaultValue")
+                .endControlFlow()
+                .addStatement("return " + state.getName())
+                .build();
+    }
 }

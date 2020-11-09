@@ -14,4 +14,6 @@ interface CalculatorContainer {
     val firstValue: Int
 
     val secondValue: Int
+
+    val string: String
 }

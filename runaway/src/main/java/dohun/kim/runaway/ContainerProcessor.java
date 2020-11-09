@@ -55,7 +55,7 @@ public class ContainerProcessor extends AbstractProcessor {
         for (Element containerElement : containerElements) {
             Container container = containerElement.getAnnotation(Container.class);
             List<? extends TypeMirror> scopeTypes = getScopesFromAnnotation(container);
-            String fileName = "Generated" + containerElement.getSimpleName().toString();
+            String fileName = getFileName(container, containerElement);
             String packageName = processingEnv.getElementUtils().getPackageOf(containerElement).toString();
 
             List<State> states = getStatesFromContainer(containerElement);
@@ -64,6 +64,23 @@ public class ContainerProcessor extends AbstractProcessor {
             writeContainer(containerSpec, packageName);
         }
         return true;
+    }
+
+    private String getFileName(Container container, Element containerElement) {
+        String customContainerName = container.customContainerName();
+        boolean hasCustomContainerName = !customContainerName.equals("");
+
+        if (hasCustomContainerName) {
+            String containerInterfaceName = containerElement.getSimpleName().toString();
+            boolean isContainerNameConflict = containerInterfaceName.equals(customContainerName);
+
+            if (isContainerNameConflict) {
+                throw new IllegalStateException("File name conflict: " + customContainerName);
+            }
+            return container.customContainerName();
+        }
+
+        return "Generated" + containerElement.getSimpleName().toString();
     }
 
     private List<State> getStatesFromContainer(Element containerElement) {

@@ -9,8 +9,8 @@ class FirstValueActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFirstValueBinding
 
-    private val calculatorContainer: GeneratedCalculatorContainer by lazy {
-        GeneratedCalculatorContainer(this)
+    private val calculatorContainer: Hello by lazy {
+        Hello(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

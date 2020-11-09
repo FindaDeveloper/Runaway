@@ -10,4 +10,6 @@ import java.lang.annotation.Target;
 public @interface Container {
 
     Class<?>[] scopes();
+
+    String customContainerName() default "";
 }

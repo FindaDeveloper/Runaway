@@ -109,7 +109,9 @@ public class ContainerProcessor extends AbstractProcessor {
             List<State> states,
             List<? extends TypeMirror> scopeTypes
     ) {
-        TypeSpec.Builder containerBuilder = TypeSpec.classBuilder(fileName);
+        TypeSpec.Builder containerBuilder = TypeSpec
+                .classBuilder(fileName)
+                .addModifiers(Modifier.PUBLIC);
         generateScopeConstructors(containerBuilder, scopeTypes);
         generateFields(containerBuilder, states);
         generateReset(containerBuilder, states);

@@ -149,9 +149,11 @@ public class ContainerProcessor extends AbstractProcessor {
     }
 
     private void generateReset(TypeSpec.Builder containerBuilder, List<State> states) {
-        MethodSpec.Builder resetBuilder = MethodSpec.methodBuilder("resetContainer");
+        MethodSpec.Builder resetBuilder = MethodSpec
+                .methodBuilder("resetContainer")
+                .addModifiers(Modifier.PUBLIC);
 
-        for(State state : states) {
+        for (State state : states) {
             resetBuilder.addStatement(state.getName() + " = null");
         }
 

@@ -112,6 +112,7 @@ public class ContainerProcessor extends AbstractProcessor {
         TypeSpec.Builder containerBuilder = TypeSpec.classBuilder(fileName);
         generateScopeConstructors(containerBuilder, scopeTypes);
         generateFields(containerBuilder, states);
+        generateReset(containerBuilder, states);
 
         return containerBuilder.build();
     }
@@ -145,6 +146,16 @@ public class ContainerProcessor extends AbstractProcessor {
             containerBuilder.addMethod(fieldGenerator.generateSetterMethodSpec());
             containerBuilder.addMethod(fieldGenerator.generateGetOrDefaultMethodSpec());
         }
+    }
+
+    private void generateReset(TypeSpec.Builder containerBuilder, List<State> states) {
+        MethodSpec.Builder resetBuilder = MethodSpec.methodBuilder("resetContainer");
+
+        for(State state : states) {
+            resetBuilder.addStatement(state.getName() + " = null");
+        }
+
+        containerBuilder.addMethod(resetBuilder.build());
     }
 
     private void writeContainer(TypeSpec containerSpec, String packageName) {

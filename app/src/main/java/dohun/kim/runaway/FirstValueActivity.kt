@@ -13,6 +13,10 @@ class FirstValueActivity : AppCompatActivity() {
         GeneratedCalculatorContainer(this)
     }
 
+    private val javaTest: GeneratedJavaTest by lazy {
+        GeneratedJavaTest(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFirstValueBinding.inflate(layoutInflater)

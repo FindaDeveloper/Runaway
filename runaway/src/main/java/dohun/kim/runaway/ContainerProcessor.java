@@ -26,6 +26,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 
 import dohun.kim.runaway.annotation.Container;
+import dohun.kim.runaway.exception.AlreadyTakenStateException;
 import dohun.kim.runaway.field.FieldGenerator;
 import dohun.kim.runaway.field.FieldGeneratorFactory;
 import dohun.kim.runaway.state.State;
@@ -93,8 +94,11 @@ public class ContainerProcessor extends AbstractProcessor {
             }
 
             StateGenerator stateGenerator = StateGeneratorFactory.getStateGenerator(stateElement);
-            State state = stateGenerator.generateState();
-            states.add(state);
+            try {
+                State state = stateGenerator.generateState(states);
+                states.add(state);
+            } catch (AlreadyTakenStateException ignore) {
+            }
         }
 
         return states;

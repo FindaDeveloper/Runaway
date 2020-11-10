@@ -1,6 +1,10 @@
 package dohun.kim.runaway.state;
 
+import java.util.List;
+
 import javax.lang.model.element.Element;
+
+import dohun.kim.runaway.exception.AlreadyTakenStateException;
 
 public abstract class StateGenerator {
 
@@ -13,7 +17,7 @@ public abstract class StateGenerator {
         this.element = element;
     }
 
-    public abstract State generateState();
+    public abstract State generateState(List<State> existStates) throws AlreadyTakenStateException;
 
     public Element getElement() {
         return element;

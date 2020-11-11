@@ -8,7 +8,7 @@ class ResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultBinding
 
-    private val calculatorContainer: GeneratedCalculatorContainer by lazy {
+    private val calculatorContainer: CalculatorContainer by lazy {
         GeneratedCalculatorContainer(this)
     }
 

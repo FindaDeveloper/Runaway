@@ -61,7 +61,7 @@ public class ContainerProcessor extends AbstractProcessor {
 
             List<State> states = getStatesFromContainer(containerElement);
 
-            TypeSpec containerSpec = generateContainer(fileName, states, scopeTypes);
+            TypeSpec containerSpec = generateContainer(containerElement, fileName, states, scopeTypes);
             writeContainer(containerSpec, packageName);
         }
         return true;
@@ -105,6 +105,7 @@ public class ContainerProcessor extends AbstractProcessor {
     }
 
     private TypeSpec generateContainer(
+            Element containerElement,
             String fileName,
             List<State> states,
             List<? extends TypeMirror> scopeTypes
@@ -112,11 +113,25 @@ public class ContainerProcessor extends AbstractProcessor {
         TypeSpec.Builder containerBuilder = TypeSpec
                 .classBuilder(fileName)
                 .addModifiers(Modifier.PUBLIC);
+
+        extendsOrImplementSuper(containerBuilder, containerElement);
         generateScopeConstructors(containerBuilder, scopeTypes);
         generateFields(containerBuilder, states);
         generateReset(containerBuilder, states);
 
         return containerBuilder.build();
+    }
+
+    private void extendsOrImplementSuper(TypeSpec.Builder containerBuilder, Element containerElement) {
+        TypeMirror containerType = containerElement.asType();
+        if (containerElement.getKind().isClass()) {
+            containerBuilder.superclass(containerType);
+            return;
+        }
+
+        if (containerElement.getKind().isInterface()) {
+            containerBuilder.addSuperinterface(containerType);
+        }
     }
 
     private void generateScopeConstructors(

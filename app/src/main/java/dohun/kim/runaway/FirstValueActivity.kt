@@ -9,7 +9,7 @@ class FirstValueActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFirstValueBinding
 
-    private val calculatorContainer: GeneratedCalculatorContainer by lazy {
+    private val calculatorContainer: CalculatorContainer by lazy {
         GeneratedCalculatorContainer(this)
     }
 

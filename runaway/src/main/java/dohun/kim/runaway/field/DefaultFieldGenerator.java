@@ -2,7 +2,9 @@ package dohun.kim.runaway.field;
 
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterSpec;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.lang.model.element.Modifier;
@@ -50,7 +52,12 @@ public class DefaultFieldGenerator extends FieldGenerator {
         return MethodSpec.methodBuilder(methodName)
                 .returns(state.getTypeName().box())
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(state.getTypeName(), "defaultValue")
+                .addParameter(
+                        ParameterSpec
+                                .builder(state.getTypeName(), "defaultValue")
+                                .addAnnotation(NotNull.class)
+                                .build()
+                )
                 .beginControlFlow("if (" + state.getName() + " == null)")
                 .addStatement(state.getName() + " = defaultValue")
                 .endControlFlow()

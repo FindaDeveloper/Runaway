@@ -11,9 +11,9 @@ import dohun.kim.runaway.annotation.Container
 )
 interface CalculatorContainer {
 
-    var firstValue: Int
+    val firstValue: Int
 
-    var secondValue: Int
+    val secondValue: Int
 
-    var string: String
+    val string: String
 }

@@ -9,7 +9,7 @@ class SecondValueActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySecondValueBinding
 
-    private val calculatorContainer: CalculatorContainer by lazy {
+    private val calculatorContainer: GeneratedCalculatorContainer by lazy {
         GeneratedCalculatorContainer(this)
     }
 

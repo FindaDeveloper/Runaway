@@ -27,7 +27,6 @@ import javax.tools.Diagnostic;
 
 import dohun.kim.runaway.annotation.Container;
 import dohun.kim.runaway.exception.AlreadyTakenStateException;
-import dohun.kim.runaway.field.DefaultFieldGenerator;
 import dohun.kim.runaway.field.FieldGenerator;
 import dohun.kim.runaway.state.State;
 import dohun.kim.runaway.state.StateGenerator;

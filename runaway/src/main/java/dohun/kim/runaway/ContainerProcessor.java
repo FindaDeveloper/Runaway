@@ -27,13 +27,19 @@ import javax.tools.Diagnostic;
 
 import dohun.kim.runaway.annotation.Container;
 import dohun.kim.runaway.exception.AlreadyTakenStateException;
+import dohun.kim.runaway.field.DefaultFieldGenerator;
 import dohun.kim.runaway.field.FieldGenerator;
-import dohun.kim.runaway.field.FieldGeneratorFactory;
 import dohun.kim.runaway.state.State;
 import dohun.kim.runaway.state.StateGenerator;
 import dohun.kim.runaway.state.StateGeneratorFactory;
 import dohun.kim.runaway.util.StringUtil;
 
+/**
+ * {@link Container} 어노테이션이 부착된 클래스 혹은 인터페이스를 통해 Container를 생성합니다.
+ *
+ * @author kimdohun
+ * @see AbstractProcessor
+ */
 @AutoService(Processor.class)
 public class ContainerProcessor extends AbstractProcessor {
 
@@ -67,7 +73,12 @@ public class ContainerProcessor extends AbstractProcessor {
         return true;
     }
 
-    private String getFileName(Container container, Element containerElement) {
+    /**
+     * @param container        만약 {@link Container#customContainerName()}이 존재한다면 해당 이름으로 변경해야 하기 때문에 받음
+     * @param containerElement {@link Container}가 부착된 클래스 혹은 인터페이스의 이름에 접근하기 위해서 사용
+     * @throws IllegalStateException customContainerName에 대해 동일한 클래스 이름이 존재할 때 발생
+     */
+    private String getFileName(Container container, Element containerElement) throws IllegalStateException {
         String customContainerName = container.customContainerName();
         boolean hasCustomContainerName = !customContainerName.equals("");
 
@@ -89,6 +100,7 @@ public class ContainerProcessor extends AbstractProcessor {
         List<State> states = new ArrayList<>();
 
         for (Element stateElement : stateElements) {
+            // Java class에서 @Container를 사용할 때 기본 생성자를 무시한다
             if (stateElement.getKind() == ElementKind.CONSTRUCTOR) {
                 continue;
             }
@@ -141,7 +153,7 @@ public class ContainerProcessor extends AbstractProcessor {
 
     private void generateFields(TypeSpec.Builder containerBuilder, List<State> states) {
         for (State state : states) {
-            FieldGenerator fieldGenerator = FieldGeneratorFactory.getFieldGenerator(state);
+            FieldGenerator fieldGenerator = new FieldGenerator(state);
 
             containerBuilder.addField(fieldGenerator.generateFieldSpec());
             containerBuilder.addMethod(fieldGenerator.generateGetterMethodSpec());
@@ -150,6 +162,9 @@ public class ContainerProcessor extends AbstractProcessor {
         }
     }
 
+    /**
+     * container의 모든 값을 null로 초기화하는 resetContainer()를 생성합니다
+     */
     private void generateReset(TypeSpec.Builder containerBuilder, List<State> states) {
         MethodSpec.Builder resetBuilder = MethodSpec
                 .methodBuilder("resetContainer")
@@ -174,13 +189,18 @@ public class ContainerProcessor extends AbstractProcessor {
         }
     }
 
+    /**
+     * {@link Container} 어노테이션에서 Class[] 정보를 얻기 위해서 아래 방식을 사용합니다.
+     *
+     * @link https://area-51.blog/2009/02/13/getting-class-values-from-annotations-in-an-annotationprocessor/
+     */
     private List<? extends TypeMirror> getScopesFromAnnotation(Container container) {
         try {
-            container.scopes();
+            container.scopes();     // must throw MirroredTypesException
         } catch (MirroredTypesException mte) {
             return mte.getTypeMirrors();
         }
-        return null;
+        throw new IllegalStateException();      // Can't reach
     }
 }
 

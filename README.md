@@ -64,6 +64,12 @@ class FirstActivity : AppCompatActivity() {
 
 ---
 
+### Special Thanks
+RunAway 설계/구현에 도움 주셨던 분들에게 감사드립니다.
+* [박영진](https://github.com/ParkYoungJin0303) 
+
+---
+
 ### License
 ``` 
 MIT License

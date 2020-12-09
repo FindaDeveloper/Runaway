@@ -7,6 +7,7 @@ import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 
 import dohun.kim.runaway.annotation.Container;
+import dohun.kim.runaway.bundle.BundleTypeNameFactory;
 import dohun.kim.runaway.exception.AlreadyTakenStateException;
 import dohun.kim.runaway.field.FieldGenerator;
 import dohun.kim.runaway.state.State;
@@ -126,6 +128,8 @@ public class ContainerProcessor extends AbstractProcessor {
         generateScopeConstructors(containerBuilder, scopeTypes);
         generateFields(containerBuilder, states);
         generateReset(containerBuilder, states);
+        generateToBundle(containerBuilder, states);
+        generateFromBundle(containerBuilder, states);
 
         return containerBuilder.build();
     }
@@ -174,6 +178,50 @@ public class ContainerProcessor extends AbstractProcessor {
         }
 
         containerBuilder.addMethod(resetBuilder.build());
+    }
+
+    private void generateToBundle(TypeSpec.Builder containerBuilder, List<State> states) {
+        try {
+            MethodSpec.Builder toBundleBuilder = MethodSpec
+                    .methodBuilder("toBundle")
+                    .returns(Class.forName("android.os.Bundle"))
+                    .addModifiers(Modifier.PUBLIC);
+            toBundleBuilder.addStatement("android.os.Bundle bundle = new android.os.Bundle()");
+
+            for (State state : states) {
+                toBundleBuilder.addStatement(
+                        "bundle.put" + BundleTypeNameFactory.getNameForBundle(state.getTypeName())
+                                + "(\"" + state.getName() + "\", " + state.getName() + ")"
+                );
+            }
+            toBundleBuilder.addStatement("return bundle");
+
+            containerBuilder.addMethod(toBundleBuilder.build());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void generateFromBundle(TypeSpec.Builder containerBuilder, List<State> states) {
+        try {
+            MethodSpec.Builder toBundleBuilder = MethodSpec
+                    .methodBuilder("toBundle")
+                    .addParameter(Class.forName("android.os.Bundle"), "bundle")
+                    .addModifiers(Modifier.PUBLIC);
+
+            for (State state : states) {
+                toBundleBuilder.addStatement(
+                        state.getName() + " = (" +
+                                state.getTypeName().toString() +
+                                ") bundle.get" + BundleTypeNameFactory.getNameForBundle(state.getTypeName())
+                                + "(\"" + state.getName() + "\")"
+                );
+            }
+
+            containerBuilder.addMethod(toBundleBuilder.build());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void writeContainer(TypeSpec containerSpec, String packageName) {

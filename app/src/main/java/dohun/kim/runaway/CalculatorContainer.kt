@@ -1,6 +1,7 @@
 package dohun.kim.runaway
 
 import dohun.kim.runaway.annotation.Container
+import java.io.Serializable
 
 @Container(
     scopes = [
@@ -16,4 +17,8 @@ interface CalculatorContainer {
     val secondValue: Int
 
     val string: String
+
+    val a: A
 }
+
+data class A(val a: String) : Serializable

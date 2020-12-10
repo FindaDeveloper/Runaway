@@ -10,7 +10,7 @@ class SecondValueActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondValueBinding
 
     private val calculatorContainer: GeneratedCalculatorContainer by lazy {
-        GeneratedCalculatorContainer(this)
+        GeneratedCalculatorContainer.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

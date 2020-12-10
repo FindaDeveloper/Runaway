@@ -8,8 +8,8 @@ class ResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultBinding
 
-    private val calculatorContainer: GeneratedCalculatorContainer by lazy {
-        GeneratedCalculatorContainer(this)
+    private val calculatorContainer: CalculatorContainer by lazy {
+        GeneratedCalculatorContainer.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,8 +17,8 @@ class ResultActivity : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val firstValue = calculatorContainer.firstValue
-        val secondValue = calculatorContainer.secondValue
+        val firstValue = calculatorContainer.firstValue ?: 0
+        val secondValue = calculatorContainer.secondValue ?: 0
 
         binding.tvResult.text = (firstValue + secondValue).toString()
     }

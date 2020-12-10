@@ -1,6 +1,6 @@
 package dohun.kim.runaway
 
-import dohun.kim.runaway.annotation.Container
+import dohun.kim.runaway_kotlin.Container
 import java.io.Serializable
 
 @Container(
@@ -12,13 +12,13 @@ import java.io.Serializable
 )
 interface CalculatorContainer {
 
-    val firstValue: Int
+    var firstValue: Int?
 
-    val secondValue: Int
+    var secondValue: Int?
 
-    val string: String
+    var string: String?
 
-    val a: A
+    var a: A?
 }
 
 data class A(val a: String) : Serializable

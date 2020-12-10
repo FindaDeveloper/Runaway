@@ -1,3 +1,4 @@
+include ':runaway-kotlin'
 include ':runaway'
 include ':app'
 rootProject.name = "RunAway"

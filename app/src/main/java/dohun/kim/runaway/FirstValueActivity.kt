@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dohun.kim.runaway.databinding.ActivityFirstValueBinding
 
-class FirstValueActivity : AppCompatActivity() {
+class FirstValueActivity : BaseActivity() {
 
     private lateinit var binding: ActivityFirstValueBinding
 
-    private val calculatorContainer: CalculatorContainer by lazy {
+    override val container: CalculatorContainer by lazy {
         GeneratedCalculatorContainer.getInstance(this)
     }
 
@@ -20,7 +20,7 @@ class FirstValueActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             val enteredValue = binding.etFirstValue.text.toString().toInt()
-            calculatorContainer.firstValue = enteredValue
+            container.firstValue = enteredValue
             startActivity(Intent(this, SecondValueActivity::class.java))
         }
     }

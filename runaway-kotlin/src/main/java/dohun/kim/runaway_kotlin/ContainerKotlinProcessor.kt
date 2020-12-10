@@ -159,7 +159,7 @@ class ContainerKotlinProcessor : AbstractProcessor() {
             .addParameter("bundle", bundleClassName)
 
         states.forEach { state ->
-            fromBundleSpec.addStatement("${state.name} = bundle[\"${state.name}\"] as ${state.typeName}")
+            fromBundleSpec.addStatement("${state.name} = bundle[\"${state.name}\"] as? ${state.typeName}")
         }
 
         fileSpecBuilder.addFunction(fromBundleSpec.build())

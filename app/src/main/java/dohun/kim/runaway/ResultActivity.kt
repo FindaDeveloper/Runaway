@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dohun.kim.runaway.databinding.ActivityResultBinding
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : BaseActivity() {
 
     private lateinit var binding: ActivityResultBinding
 
-    private val calculatorContainer: CalculatorContainer by lazy {
+    override val container: CalculatorContainer by lazy {
         GeneratedCalculatorContainer.getInstance(this)
     }
 
@@ -17,8 +17,8 @@ class ResultActivity : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val firstValue = calculatorContainer.getFirstValueOrDefault(0)
-        val secondValue = calculatorContainer.getSecondValueOrDefault(0)
+        val firstValue = container.getFirstValueOrDefault(0)
+        val secondValue = container.getSecondValueOrDefault(0)
 
         binding.tvResult.text = (firstValue + secondValue).toString()
     }

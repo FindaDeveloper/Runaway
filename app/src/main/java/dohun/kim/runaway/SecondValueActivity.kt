@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dohun.kim.runaway.databinding.ActivitySecondValueBinding
 
-class SecondValueActivity : AppCompatActivity() {
+class SecondValueActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySecondValueBinding
 
-    private val calculatorContainer: GeneratedCalculatorContainer by lazy {
+    override val container: GeneratedCalculatorContainer by lazy {
         GeneratedCalculatorContainer.getInstance(this)
     }
 
@@ -20,7 +20,7 @@ class SecondValueActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             val enteredValue = binding.etSecondValue.text.toString().toInt()
-            calculatorContainer.secondValue = enteredValue
+            container.secondValue = enteredValue
             startActivity(Intent(this, ResultActivity::class.java))
         }
     }

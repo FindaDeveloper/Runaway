@@ -4,6 +4,7 @@ import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.*
 import dohun.kim.runaway_kotlin.state.State
 import dohun.kim.runaway_kotlin.state.generateState
+import java.util.*
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
@@ -134,7 +135,7 @@ class ContainerKotlinProcessor : AbstractProcessor() {
     ) {
         states.forEach { state ->
             fileSpecBuilder.addFunction(
-                FunSpec.builder("get${state.name}OrDefault")
+                FunSpec.builder("get${state.name.capitalize(Locale.getDefault())}OrDefault")
                     .receiver(containerElementTypeName)
                     .returns(state.typeName)
                     .addParameter("default", state.typeName)

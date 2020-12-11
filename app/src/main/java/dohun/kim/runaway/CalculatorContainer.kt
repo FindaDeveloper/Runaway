@@ -19,6 +19,8 @@ interface CalculatorContainer {
     var string: String?
 
     var a: A?
+
+    var list: List<String>?
 }
 
 data class A(val a: String) : Serializable

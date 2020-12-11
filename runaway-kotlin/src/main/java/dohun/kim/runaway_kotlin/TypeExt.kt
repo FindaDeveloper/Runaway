@@ -1,25 +1,30 @@
 package dohun.kim.runaway_kotlin
 
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.ParameterizedTypeName
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asTypeName
 import java.lang.IllegalStateException
+import javax.lang.model.element.Element
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.type.TypeMirror
 import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
 import kotlin.reflect.jvm.internal.impl.name.FqName
 
 fun ExecutableElement.getTypeName(): TypeName {
-    return javaToKotlinType(this.returnType) ?: throw IllegalStateException()
+    return this.returnType.asTypeName().javaToKotlinType()
 }
 
-private fun javaToKotlinType(typeMirror: TypeMirror): TypeName? {
-    val className = JavaToKotlinClassMap.INSTANCE.mapJavaToKotlin(FqName(typeMirror.asTypeName().toString()))?.asSingleFqName()?.asString()
-    return if (className == null) {
-        typeMirror.asTypeName()
-    } else {
-        ClassName.bestGuess(className)
-    }
+private fun TypeName.javaToKotlinType(): TypeName = if (this is ParameterizedTypeName) {
+    (rawType.javaToKotlinType() as ClassName).parameterizedBy(
+        *typeArguments.map { it.javaToKotlinType() }.toTypedArray()
+    )
+} else {
+    val className = JavaToKotlinClassMap.INSTANCE
+        .mapJavaToKotlin(FqName(toString()))?.asSingleFqName()?.asString()
+    if (className == null) this
+    else ClassName.bestGuess(className)
 }
 
 fun TypeName.toBundleTypeName(): String {

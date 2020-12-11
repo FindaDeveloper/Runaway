@@ -49,8 +49,8 @@ class ContainerKotlinProcessor : AbstractProcessor() {
                 packageName
             )
             generateGetOrDefaults(fileSpecBuilder, containerElementTypeName, states)
-            generateFromBundle(fileSpecBuilder, containerElementTypeName, states)
-            generateToBundle(fileSpecBuilder, containerElementTypeName, states)
+//            generateFromBundle(fileSpecBuilder, containerElementTypeName, states)
+//            generateToBundle(fileSpecBuilder, containerElementTypeName, states)
 
             fileSpecBuilder.build().writeTo(processingEnv.filer)
         }

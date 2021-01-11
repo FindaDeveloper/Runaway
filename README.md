@@ -3,7 +3,7 @@ Runaway from RuntimeException with AnnotationProcessor
 
 ### 개요
 RunAway는 Annotation Processing을 사용하여 컴파일 타임에 범위 제한 데이터 컨테이너를 생성할 수 있는 라이브러리입니다.  
-![image](https://user-images.githubusercontent.com/36754680/98912694-c7aeff00-2509-11eb-963e-082a20ec4e67.png)
+![image](https://user-images.githubusercontent.com/36754680/104155084-c3c82c00-5429-11eb-901d-6f2e3d783bdb.jpg)
 
 ### Download
 ``` groovy

@@ -74,7 +74,7 @@ RunAway 설계/구현에 도움 주셨던 분들에게 감사드립니다.
 ``` 
 MIT License
 
-Copyright (c) 2020 Dohun Kim
+Copyright (c) 2021 Finda Developer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

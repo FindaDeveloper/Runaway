@@ -49,7 +49,7 @@ interface CalculatorContainer {
 class FirstActivity : AppCompatActivity() {
 
   private val calculatorContainer by lazy {
-    GeneratedCalculatorContainer(this)
+    GeneratedCalculatorContainer.getInstance(this)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,12 +61,6 @@ class FirstActivity : AppCompatActivity() {
   }
 }
 ```
-
----
-
-### Special Thanks
-RunAway 설계/구현에 도움 주셨던 분들에게 감사드립니다.
-* [박영진](https://github.com/ParkYoungJin0303) 
 
 ---
 

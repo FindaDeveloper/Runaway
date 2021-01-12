@@ -1,14 +1,11 @@
-package dohun.kim.runaway_kotlin
+package kr.co.finda.runaway
 
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asTypeName
-import java.lang.IllegalStateException
-import javax.lang.model.element.Element
 import javax.lang.model.element.ExecutableElement
-import javax.lang.model.type.TypeMirror
 import kotlin.reflect.jvm.internal.impl.builtins.jvm.JavaToKotlinClassMap
 import kotlin.reflect.jvm.internal.impl.name.FqName
 

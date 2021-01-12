@@ -4,4 +4,6 @@
     <string name="next">다음으로</string>
     <string name="second_value">두번째 값</string>
     <string name="calculate">계산하기</string>
+    <string name="name">이름</string>
+    <string name="complete">완료</string>
 </resources>

@@ -1,6 +1,6 @@
-package dohun.kim.runaway_kotlin.state
+package kr.co.finda.runaway.state
 
-import dohun.kim.runaway_kotlin.getTypeName
+import kr.co.finda.runaway.getTypeName
 import java.util.*
 import javax.lang.model.element.Element
 import javax.lang.model.element.ExecutableElement

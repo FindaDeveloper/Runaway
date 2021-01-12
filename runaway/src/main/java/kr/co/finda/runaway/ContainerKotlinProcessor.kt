@@ -1,9 +1,9 @@
-package dohun.kim.runaway_kotlin
+package kr.co.finda.runaway
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.*
-import dohun.kim.runaway_kotlin.state.State
-import dohun.kim.runaway_kotlin.state.generateState
+import kr.co.finda.runaway.state.State
+import kr.co.finda.runaway.state.generateState
 import java.util.*
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
@@ -61,7 +61,8 @@ class ContainerKotlinProcessor : AbstractProcessor() {
         val states = arrayListOf<State>()
         containerElement.enclosedElements.forEach { stateElement ->
             try {
-                val state = generateState(stateElement, states)
+                val state =
+                    generateState(stateElement, states)
                 states.add(state)
             } catch (e: Exception) {
             }

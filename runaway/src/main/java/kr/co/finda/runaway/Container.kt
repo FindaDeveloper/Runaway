@@ -1,4 +1,4 @@
-package dohun.kim.runaway_kotlin
+package kr.co.finda.runaway
 
 import kotlin.reflect.KClass
 

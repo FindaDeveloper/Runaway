@@ -5,7 +5,7 @@ Runaway from RuntimeException with AnnotationProcessor
 RunAway는 Annotation Processing을 사용하여 컴파일 타임에 범위 제한 데이터 컨테이너를 생성할 수 있는 라이브러리입니다.  
 ![image](https://user-images.githubusercontent.com/36754680/104155167-ebb78f80-5429-11eb-8ecd-81c4bf05adbf.jpg)
 
-### Download
+### Download [![](https://jitpack.io/v/FindaDeveloper/Runaway.svg)](https://jitpack.io/#FindaDeveloper/Runaway)
 ``` groovy
 // Project-level
 allProjects {
@@ -19,8 +19,8 @@ allProjects {
 apply plugin: 'kotlin-kapt'
 
 dependencies {
-  compileOnly 'com.github.kimdohun0104:runaway:0.0.5'
-  kapt 'com.github.kimdohun0104:runaway:0.0.5'
+  compileOnly 'com.github.FindaDeveloper:Runaway:$runaway_version'
+  kapt 'com.github.FindaDeveloper:Runaway:$runaway_version'
 }
 ```
 
@@ -39,9 +39,9 @@ dependencies {
 )
 interface CalculatorContainer {
   // 컨테이너가 포함하는 상태
-  val firstValue: Int
+  var firstValue: Int?
   
-  val secondValue: Int
+  var secondValue: Int?
 }
 ```
 ### 생성된 컨테이너 사용
@@ -49,24 +49,18 @@ interface CalculatorContainer {
 class FirstActivity : AppCompatActivity() {
 
   private val calculatorContainer by lazy {
-    GeneratedCalculatorContainer(this)
+    GeneratedCalculatorContainer.getInstance(this)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     ...
     
     btn_next.setOnClickListener {
-      calculatorContainer.firstValue = et_first_value.text.toString ()
+      calculatorContainer.firstValue = et_first_value.text.toString()
     }
   }
 }
 ```
-
----
-
-### Special Thanks
-RunAway 설계/구현에 도움 주셨던 분들에게 감사드립니다.
-* [박영진](https://github.com/ParkYoungJin0303) 
 
 ---
 

@@ -1,9 +1,9 @@
-package kr.co.finda.runaway
+package kr.co.finda.runaway.processor
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.*
-import kr.co.finda.runaway.state.State
-import kr.co.finda.runaway.state.generateState
+import kr.co.finda.runaway.processor.state.State
+import kr.co.finda.runaway.processor.state.generateState
 import java.util.*
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
@@ -13,6 +13,7 @@ import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 import javax.lang.model.type.MirroredTypesException
 import javax.lang.model.type.TypeMirror
+import kr.co.finda.runaway.annotation.Container
 
 @AutoService(Processor::class)
 class ContainerKotlinProcessor : AbstractProcessor() {

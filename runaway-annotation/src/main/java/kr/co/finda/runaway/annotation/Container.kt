@@ -1,4 +1,4 @@
-package kr.co.finda.runaway
+package kr.co.finda.runaway.annotation
 
 import kotlin.reflect.KClass
 

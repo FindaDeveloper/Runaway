@@ -4,15 +4,13 @@ plugins {
     id 'com.github.dcendents.android-maven'
 }
 
+group = 'com.github.FindaDeveloper'
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
 
-group = 'com.github.FindaDeveloper'
-
 dependencies {
-    api project(':runaway-annotation')
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

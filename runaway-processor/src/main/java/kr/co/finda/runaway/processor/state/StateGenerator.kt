@@ -1,6 +1,6 @@
-package kr.co.finda.runaway.state
+package kr.co.finda.runaway.processor.state
 
-import kr.co.finda.runaway.getTypeName
+import kr.co.finda.runaway.processor.getTypeName
 import java.util.*
 import javax.lang.model.element.Element
 import javax.lang.model.element.ExecutableElement

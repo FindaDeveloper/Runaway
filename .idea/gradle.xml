@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/runaway" />
+            <option value="$PROJECT_DIR$/runaway-annotation" />
+            <option value="$PROJECT_DIR$/runaway-processor" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

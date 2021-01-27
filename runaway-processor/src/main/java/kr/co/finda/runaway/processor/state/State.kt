@@ -1,4 +1,4 @@
-package kr.co.finda.runaway.state
+package kr.co.finda.runaway.processor.state
 
 import com.squareup.kotlinpoet.TypeName
 

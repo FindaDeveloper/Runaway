@@ -1,12 +1,12 @@
-package kr.co.finda.runaway
+package kr.co.finda.runaway.example
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import kr.co.finda.runaway.data.GeneratedNameContainer
-import kr.co.finda.runaway.data.NameContainer
+import kr.co.finda.runaway.example.data.GeneratedNameContainer
+import kr.co.finda.runaway.example.data.NameContainer
 
 class InputActivity : AppCompatActivity() {
 

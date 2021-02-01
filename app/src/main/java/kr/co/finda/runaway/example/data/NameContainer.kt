@@ -1,8 +1,8 @@
-package kr.co.finda.runaway.data
+package kr.co.finda.runaway.example.data
 
-import kr.co.finda.runaway.InputActivity
-import kr.co.finda.runaway.ResultActivity
+import kr.co.finda.runaway.example.InputActivity
 import kr.co.finda.runaway.annotation.Container
+import kr.co.finda.runaway.example.ResultActivity
 
 @Container(
     scopes = [

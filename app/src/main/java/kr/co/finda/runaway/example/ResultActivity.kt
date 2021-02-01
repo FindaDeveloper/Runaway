@@ -1,10 +1,10 @@
-package kr.co.finda.runaway
+package kr.co.finda.runaway.example
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kr.co.finda.runaway.data.GeneratedNameContainer
-import kr.co.finda.runaway.data.NameContainer
+import kr.co.finda.runaway.example.data.GeneratedNameContainer
+import kr.co.finda.runaway.example.data.NameContainer
 
 class ResultActivity : AppCompatActivity() {
 

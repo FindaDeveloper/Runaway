@@ -1,5 +1,5 @@
+include ':runaway'
 include ':runaway-processor'
 include ':runaway-annotation'
-include ':runaway'
 include ':app'
 rootProject.name = "RunAway"

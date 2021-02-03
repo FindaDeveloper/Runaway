@@ -97,13 +97,20 @@ class ContainerKotlinProcessor : AbstractProcessor() {
             }
         )
 
-        addCompanionObject(containerBuilder, scopes, packageName, fileName)
+        addCompanionObject(
+            containerBuilder,
+            containerElementTypeName,
+            scopes,
+            packageName,
+            fileName
+        )
 
         fileSpecBuilder.addType(containerBuilder.build())
     }
 
     private fun addCompanionObject(
         containerBuilder: TypeSpec.Builder,
+        containerElementTypeName: TypeName,
         scopes: List<TypeMirror>,
         packageName: String,
         fileName: String
@@ -120,9 +127,10 @@ class ContainerKotlinProcessor : AbstractProcessor() {
         scopes.forEach { typeMirror ->
             companionBuilder.addFunction(
                 FunSpec.builder("getInstance")
-                    .returns(containerClass)
+                    .returns(containerElementTypeName)
                     .addParameter("scope", typeMirror.asTypeName())
-                    .addStatement("return INSTANCE ?: ${containerClass.simpleName}().also { INSTANCE = it }")
+                    .addStatement("return INSTANCE ?: ${containerClass.simpleName}()\n" +
+                            ".also { INSTANCE = it }")
                     .build()
             )
         }

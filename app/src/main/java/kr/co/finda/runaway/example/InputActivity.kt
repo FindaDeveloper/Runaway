@@ -10,7 +10,7 @@ import kr.co.finda.runaway.example.data.NameContainer
 
 class InputActivity : AppCompatActivity() {
 
-    private val nameContainer: NameContainer by lazy {
+    private val nameContainer by lazy {
         GeneratedNameContainer.getInstance(this)
     }
 

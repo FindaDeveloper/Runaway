@@ -19,8 +19,8 @@ allProjects {
 apply plugin: 'kotlin-kapt'
 
 dependencies {
-  compileOnly 'com.github.FindaDeveloper:Runaway:$runaway_version'
-  kapt 'com.github.FindaDeveloper:Runaway:$runaway_version'
+  compileOnly 'com.github.FindaDeveloper:Runaway:runaway:$runaway_version'
+  kapt 'com.github.FindaDeveloper:Runaway:runaway-processor:$runaway_version'
 }
 ```
 

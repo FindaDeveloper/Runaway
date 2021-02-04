@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="RunAway.app" target="1.8" />
+      <module name="RunAway.runaway" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
